@@ -8,7 +8,9 @@ export const getFilePath = (firstfile) => {
   return JSON.parse(read);
 };
 
-export const compareFiles = (file1, file2) => {
+export const compareFiles = (filepath1, filepath2) => {
+  const file1 = getFilePath(filepath1);
+  const file2 = getFilePath(filepath2);
   const keys = _.keys({ ...file1, ...file2 });
   let resultString = '{\n';
   const sorted = _.sortBy(keys);
@@ -29,5 +31,5 @@ export const compareFiles = (file1, file2) => {
       }
     }
   });
-  return resultString;
+  return resultString + '}';
 };

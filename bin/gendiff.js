@@ -10,10 +10,7 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    const file1 = getFilePath(filepath1);
-    const file2 = getFilePath(filepath2);
-    const compared = compareFiles(file1, file2);
-    console.log(compared);
+    console.log(compareFiles(filepath1, filepath2));
   });
 
 program.parse();
