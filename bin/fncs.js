@@ -1,11 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import _ from 'lodash';
+import getParsers from './parsers.js';
 
 export const getFilePath = (firstfile) => {
   const filePath = path.isAbsolute(firstfile) ? firstfile : path.resolve(process.cwd(), firstfile);
   const read = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(read);
+  return getParsers(read, filePath);
 };
 
 export const compareFiles = (filepath1, filepath2) => {
@@ -15,11 +16,11 @@ export const compareFiles = (filepath1, filepath2) => {
   let resultString = '{\n';
   const sorted = _.sortBy(keys);
   const newString = sorted.map((key) => {
-    if (!_.has(file1, key)) {
-      resultString += `  + ${key}: ${file2[key]}\n`;
-    }
     if (!_.has(file2, key)) {
       resultString += `  - ${key}: ${file1[key]}\n`;
+    }
+    if (!_.has(file1, key)) {
+      resultString += `  + ${key}: ${file2[key]}\n`;
     }
     if (_.has(file1, key) && _.has(file2, key)) {
       if (file1[key] === file2[key]) {

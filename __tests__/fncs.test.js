@@ -11,11 +11,11 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const data1 = getFixturePath('file1.json');
 const data2 = getFixturePath('file2.json');
-const getResult = readFile('expectedfile.txt');
+const data3 = getFixturePath('file1.yml');
+const data4 = getFixturePath('file2.yml');
+// const getResult = readFile('expectedfile.txt');
 
-console.log(getResult);
-
-test('compareFiles', () => {
+test('compareFiles, json format', () => {
     expect(compareFiles(data1, data2)).toEqual(
 `{
   - follow: false
@@ -27,3 +27,20 @@ test('compareFiles', () => {
 }`
 );
 });
+
+test('compareFiles, yml format', () => {
+  expect(compareFiles(data3, data4)).toEqual(
+`{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`
+);
+});
+
+// test ('getParsers', () => {
+
+// });
