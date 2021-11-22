@@ -1,13 +1,4 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import _ from 'lodash';
-import getParsers from './parsers.js';
-
-export const getFilePath = (firstfile) => {
-  const filePath = path.isAbsolute(firstfile) ? firstfile : path.resolve(process.cwd(), firstfile);
-  const read = fs.readFileSync(filePath, 'utf-8');
-  return getParsers(read, filePath);
-};
 
 export const compareFiles = (file1, file2) => {
   const keys = Object.keys({ ...file1, ...file2 });
@@ -50,29 +41,6 @@ export const compareFiles = (file1, file2) => {
   //   return finishedArray;
   // });
   // return finishedArray;
-
-  // const buildTree = (data1, data2) => {
-  //   const keys = Object.keys({ ...data1, ...data2 });
-  //   const sortedKeys = _.sortBy(keys);
-  //   return sortedKeys.map((key) => {
-  //     const value1 = data1[key];
-  //     const value2 = data2[key];
-  //     if (!_.has(data1, key)) {
-  //       return { type: 'add', key, val: value2 };
-  //     }
-  //     if (!_.has(data2, key)) {
-  //       return { type: 'remove', key, val: value1 };
-  //     }
-  //     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-  //       return { type: 'recursion', key, children: buildTree(value1, value2) };
-  //     }
-  //     if (!_.isEqual(value1, value2)) {
-  //       return {
-  //         type: 'updated', key, val1: value1, val2: value2,
-  //       };
-  //     }
-  //     return { type: 'same', key, val: value1 };
-  //   });
 
   // return sorted.map((key) => {
   //   if (!_.has(file2, key)) {

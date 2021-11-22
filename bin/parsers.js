@@ -8,8 +8,6 @@ const getParsers = (read, pathFile) => {
       return JSON.parse(read);
     case '.yml':
       return yaml.load(read);
-    default:
-      throw new Error(`${fileFormat}: this format is not supported`);
   }
 };
 
