@@ -29,6 +29,8 @@ const stylish = (compFiles) => {
         return `${getValue(item.val1, '-')}${getValue(item.val2, '+')}`;
       case 'rec':
         return `${getSpace(space)}  ${item.key}: {\n${getResult(item.child, space + 1).join('')}${getSpace(space)}  }\n`;
+      default:
+        throw new Error(`Mark not defined: ${item.mark}`);
     }
   });
   return `{\n${getResult(compFiles, 1).join('')}}`;

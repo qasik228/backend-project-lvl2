@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import _ from 'lodash';
-import { compareFiles } from './fncs.js';
+import compareFiles from './fncs.js';
 import format from './formatters/index.js';
 import getParsers from './parsers.js';
 

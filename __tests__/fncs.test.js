@@ -13,6 +13,7 @@ const cases = [
   ['filepath1.json', 'filepath2.json', 'expectedstylish.txt', 'stylish'],
   ['filepath1.yml', 'filepath2.yml', 'expectedstylish.txt', 'stylish'],
   ['filepath1.json', 'filepath2.json', 'expectedplain.txt', 'plain'],
+  ['filepath1.json', 'filepath2.json', 'expectedjson.txt', 'json'],
 ];
 
 test.each(cases)('gendiff', (file1, file2, expectedResult, format) => {
@@ -22,39 +23,3 @@ test.each(cases)('gendiff', (file1, file2, expectedResult, format) => {
   const result = gendiff(firstFile, secondFile, format);
   expect(result).toEqual(getResult);
 });
-
-// const data1 = getFixturePath('file1.json');
-// const data2 = getFixturePath('file2.json');
-// const data3 = getFixturePath('file1.yml');
-// const data4 = getFixturePath('file2.yml');
-// const getResult = readFile('expectedfile.txt');
-
-// test('compareFiles, json format', () => {
-//   expect(compareFiles(data1, data2)).toEqual(
-//     `{
-//   - follow: false
-//     host: hexlet.io
-//   - proxy: 123.234.53.22
-//   - timeout: 50
-//   + timeout: 20
-//   + verbose: true
-// }`,
-//   );
-// });
-
-// test('compareFiles, yml format', () => {
-//   expect(compareFiles(data3, data4)).toEqual(
-//     `{
-//   - follow: false
-//     host: hexlet.io
-//   - proxy: 123.234.53.22
-//   - timeout: 50
-//   + timeout: 20
-//   + verbose: true
-// }`,
-//   );
-// });
-
-// test ('getParsers', () => {
-
-// });
