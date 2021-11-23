@@ -32,7 +32,7 @@ jobs:
         run: make lint
         # Test
       - name: test
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses:
         env:
           CC_TEST_REPORTER_ID: eacc5a6985e897fb3be8bf82864e994a68dacd8fa16a73e16b5a10b9b2d8f4bf
         with:
