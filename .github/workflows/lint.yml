@@ -1,4 +1,4 @@
-name: action
+name: Lint
 on: push
 
 jobs:
@@ -32,4 +32,9 @@ jobs:
         run: make lint
         # Test
       - name: test
-        uses: 
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: make test-cover
+          debug: true
