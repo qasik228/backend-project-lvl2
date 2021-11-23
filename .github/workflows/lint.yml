@@ -17,13 +17,13 @@ jobs:
         # https://github.com/actions/checkout
       - uses: actions/checkout@v2
         # Step's name
-      - name: Use Node.js 
+      - name: Use Node.js ${{ matrix.node-version }}
         # Configures the node version used on GitHub-hosted runners
         # https://github.com/actions/setup-node
         uses: actions/setup-node@v1
         # The Node.js version to configure
         with:
-          node-version: 16
+          node-version: ${{ matrix.node-version }}
         # Install project
       - name: npm install
         run: make install
@@ -32,9 +32,9 @@ jobs:
         run: make lint
         # Test
       - name: test
-        uses:
+        uses: paambaati/codeclimate-action@v2.7.4
         env:
-          CC_TEST_REPORTER_ID: eacc5a6985e897fb3be8bf82864e994a68dacd8fa16a73e16b5a10b9b2d8f4bf
+          LITTLE_RABBIT: ${{ secrets.LITTLE_RABBIT }}
         with:
           coverageCommand: make test-cover
           debug: true
