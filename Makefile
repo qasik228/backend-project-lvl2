@@ -4,6 +4,7 @@ gendiff:
 	node bin/gendiff -h
 publish:
 	npm publish --dry-run
+	npm link
 lint:
 	npx eslint .
 lintFix:
