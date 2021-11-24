@@ -1,4 +1,3 @@
-
 name: Lint
 
 on: push
@@ -15,17 +14,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: [16.x]
 
       - name: Install Node.js dependencies
         run: make install
 
-      # Install your linters here
-
       - name: Run linters
         run: make lint
 
-        
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
