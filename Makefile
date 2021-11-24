@@ -9,6 +9,6 @@ lint:
 lintFix:
 	npx eslint --fix .
 test:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+	npx jest
 test-cover:
-	NODE_OPTIONS=--experimental-vm-modules npx jest -- --coverage --coverageProvider=v8
+	npx jest --coverage

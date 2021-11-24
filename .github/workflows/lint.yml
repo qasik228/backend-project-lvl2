@@ -3,27 +3,35 @@ name: Lint
 on: push
 
 jobs:
-  run-linters:
-    name: Run linters
+  build:
+
+    # The type of machine to run the job on
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: [16.x]
-
-      - name: Install Node.js dependencies
-        run: make install
-
-      - name: Run linters
-        run: make lint
-
+      - name: npm install
+        # Install project
+        run:
+          make install
+        # Add environment variables
+        env:
+          CI: true
+      - name: Run linter
+        # Run Linter
+        run:
+          make lint
+      - name: Run Test
+        # Run Test
+        run:
+          make test
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.5
+        # Publish code coverage on Code Climate
+        # https://github.com/paambaati/codeclimate-action
+        uses: paambaati/codeclimate-action@v2.7.4
+        # Add Code Climate secret key
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
