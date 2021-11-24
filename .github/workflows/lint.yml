@@ -1,40 +1,35 @@
+
 name: Lint
+
 on: push
 
 jobs:
-  check:
-
-    # The type of machine to run the job on
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
 
-    strategy:
-      # Node versions list
-      matrix:
-        node-version: [16.x]
-
     steps:
-        # Check-out repository under GitHub workspace
-        # https://github.com/actions/checkout
-      - uses: actions/checkout@v2
-        # Step's name
-      - name: Use Node.js ${{ matrix.node-version }}
-        # Configures the node version used on GitHub-hosted runners
-        # https://github.com/actions/setup-node
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
         uses: actions/setup-node@v1
-        # The Node.js version to configure
         with:
-          node-version: ${{ matrix.node-version }}
-        # Install project
-      - name: npm install
+          node-version: 14
+
+      - name: Install Node.js dependencies
         run: make install
-        # Linter
-      - name: Run linter
+
+      # Install your linters here
+
+      - name: Run linters
         run: make lint
-        # Test
-      - name: test
+
+        
+      - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
-          LITTLE_RABBIT: ${{ secrets.LITTLE_RABBIT }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: make test-cover
+          coverageCommand: make test-coverage
           debug: true
