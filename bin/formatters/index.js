@@ -6,10 +6,8 @@ const format = (compFile, formatName) => {
     return stylish(compFile);
   } if (formatName === 'plain') {
     return plain(compFile);
-  } if (formatName === 'json') {
-    return JSON.stringify(compFile);
   }
-  throw Error(`This format is not supported: ${formatName}`);
+  return JSON.stringify(compFile);
   // switch (formatName) {
   //   case 'stylish':
   //     return stylish(compFile);
