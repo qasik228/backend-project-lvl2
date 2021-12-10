@@ -9,7 +9,7 @@ const format = (compFile, formatName) => {
   } if (formatName === 'json') {
     return JSON.stringify(compFile);
   }
-  throw new Error(`This format is not supported: ${formatName}`);
+  throw Error(`This format is not supported: ${formatName}`);
   // switch (formatName) {
   //   case 'stylish':
   //     return stylish(compFile);
