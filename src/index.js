@@ -14,7 +14,7 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
   const file1 = getFilePath(filepath1);
   const file2 = getFilePath(filepath2);
   const compFile = compareFiles(file1, file2);
-  //console.log(compFile);
+  // console.log(compFile);
   return format(compFile, formatName);
 };
 
