@@ -1,11 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import compareFiles from './fncs.js';
+import buildTree from './treeBuilder.js';
 import format from './formatters/index.js';
 import getParsers from './parsers.js';
 
-const getFilePath = (firstfile) => {
-  const filePath = path.isAbsolute(firstfile) ? firstfile : path.resolve(process.cwd(), firstfile);
+const getFilePath = (file) => {
+  const filePath = path.resolve(process.cwd(), file);
   const read = fs.readFileSync(filePath, 'utf-8');
   return getParsers(read, filePath);
 };
@@ -13,8 +13,7 @@ const getFilePath = (firstfile) => {
 const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
   const file1 = getFilePath(filepath1);
   const file2 = getFilePath(filepath2);
-  const compFile = compareFiles(file1, file2);
-  // console.log(compFile);
+  const compFile = buildTree(file1, file2);
   return format(compFile, formatName);
 };
 

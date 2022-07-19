@@ -1,16 +1,15 @@
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 
+const parsTree = {
+  json: JSON.parse,
+  yml: yaml.safeLoad,
+};
+
 const getParsers = (read, pathFile) => {
-  const fileFormat = path.extname(pathFile);
-  switch (fileFormat) {
-    case '.json':
-      return JSON.parse(read);
-    case '.yml':
-      return yaml.load(read);
-    default:
-      throw new Error(`This format not supported: ${fileFormat}`);
-  }
+  const fileFormat = path.extname(pathFile).substring(1);
+  const parse = parsTree[fileFormat];
+  return parse(read);
 };
 
 export default getParsers;

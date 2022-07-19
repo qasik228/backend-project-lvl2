@@ -18,19 +18,19 @@ const str = (data, compFileSpace) => {
 const stylish = (compFiles) => {
   const getResult = (compFile, space) => compFile.map((item) => {
     const getValue = (value, symbol) => `${getSpace(space)}${symbol} ${item.key}: ${str(value, space)}\n`;
-    switch (item.mark) {
-      case '-':
-        return `${getValue(item.val, '-')}`;
-      case '+':
-        return `${getValue(item.val, '+')}`;
-      case ' ':
-        return `${getValue(item.val, ' ')}`;
-      case '-+':
-        return `${getValue(item.val1, '-')}${getValue(item.val2, '+')}`;
-      case 'rec':
+    switch (item.type) {
+      case 'deleted':
+        return `${getValue(item.value, '-')}`;
+      case 'added':
+        return `${getValue(item.value, '+')}`;
+      case 'unchanged':
+        return `${getValue(item.value, ' ')}`;
+      case 'changed':
+        return `${getValue(item.value1, '-')}${getValue(item.value2, '+')}`;
+      case 'nested':
         return `${getSpace(space)}  ${item.key}: {\n${getResult(item.child, space + 1).join('')}${getSpace(space)}  }\n`;
       default:
-        throw new Error(`Mark not defined: ${item.mark}`);
+        throw new Error(`Mark not defined: ${item.type}`);
     }
   });
   return `{\n${getResult(compFiles, 1).join('')}}`;
