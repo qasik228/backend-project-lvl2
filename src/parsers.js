@@ -1,13 +1,11 @@
-import * as path from 'path';
 import * as yaml from 'js-yaml';
 
 const parsTree = {
   json: JSON.parse,
-  yml: yaml.safeLoad,
+  yml: yaml.load,
 };
 
-const getParsers = (read, pathFile) => {
-  const fileFormat = path.extname(pathFile).substring(1);
+const getParsers = (read, fileFormat) => {
   const parse = parsTree[fileFormat];
   return parse(read);
 };
