@@ -3,6 +3,7 @@ import * as yaml from 'js-yaml';
 const parsTree = {
   json: JSON.parse,
   yml: yaml.load,
+  yaml: yaml.load,
 };
 
 const getParsers = (read, fileFormat) => {
